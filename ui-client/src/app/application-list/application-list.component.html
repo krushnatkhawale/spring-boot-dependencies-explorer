@@ -1,0 +1,21 @@
+<h2>Applications registered so far!</h2>
+<div class="content">
+<table border="1">
+  <tr style="border: 1px solid black;">
+    <th>Group name</th>
+    <th>Artifact name</th>
+    <th>No of dependencies</th>
+  </tr>
+  <tr *ngFor="let app of applications">
+    <td>
+      {{app.group}}
+    </td>
+    <td>
+      {{app.artifact}}
+    </td>
+    <td>
+      {{app.dependencies}}
+    </td>
+  </tr>
+</table>
+</div>
