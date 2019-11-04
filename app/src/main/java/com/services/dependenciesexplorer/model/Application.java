@@ -1,29 +1,50 @@
 package com.services.dependenciesexplorer.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Table(name = "Application")
 public class Application {
+
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name="groupName")
-    private @NonNull String group;
-    private @NonNull String artifact;
+    private String title;
 
-    @ElementCollection
-    @CollectionTable(name="Dependencies", joinColumns=@JoinColumn(name="id"))
-    @Column(name="dependency")
-    private @NonNull List<String> dependencies;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "post_id")
+    private List<Dependency> comments = new ArrayList<>();
 
+    public Application() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Dependency> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Dependency> comments) {
+        this.comments = comments;
+    }
 }
-
-
